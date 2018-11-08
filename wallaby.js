@@ -8,6 +8,7 @@ module.exports = (wallaby) => {
 	return {
 		files: [
 			'src/**/*',
+			{ pattern: 'node_modules/vue-spinner/**/*.+(js|vue)', instrument: false },
 			'testConfig/**/*.js',
 			'jest.config.js',
 			'package.json',
@@ -42,11 +43,7 @@ module.exports = (wallaby) => {
 
 		setup: function (wallaby) {
 			const jestConfig = require('./package').jest || require('./jest.config')
-			// jestConfig.transform = {}
-			jestConfig.transform = {
-				'^.+(vue-spinner[^$]+.vue)': 'vue-jest'
-			};
-			// delete jestConfig.transform['^.+\\.tsx?$']
+			jestConfig.transform = {}
 			wallaby.testFramework.configure(jestConfig)
 		},
 
